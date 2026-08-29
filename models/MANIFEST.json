@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "release_tag": "v0.1.0",
+  "models": [
+    {
+      "role": "base_pretrained",
+      "filename": "murmur_203m_base_weights_only.pt",
+      "bytes": 812223200,
+      "sha256": "5406a6ac67c47fe53eb0d65eff4f490aca200cdb89d172fdc8f56f24d2dd0297",
+      "parameters": 203037056,
+      "context_tokens": 2048
+    },
+    {
+      "role": "text_simplification_sft",
+      "filename": "murmur_203m_text_simplification_best_weights_only.pt",
+      "bytes": 812221131,
+      "sha256": "da9690eb4a6806e8570f0df83da3c6149f1a8cd29b423d568be907e1ef913777",
+      "parameters": 203037056,
+      "context_tokens": 896
+    }
+  ],
+  "tokenizer": {
+    "filename": "tokenizer/sp_unigram_32k.model",
+    "sha256": "bc784f8816ec143bc53d1744d3e607872fb27a4ba4d689792915add6a78003d4",
+    "vocab_size": 32000
+  }
+}
