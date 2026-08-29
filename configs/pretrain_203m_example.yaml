@@ -24,7 +24,7 @@ tokenizer:
   num_threads: 4
 
 model:
-  max_seq_len: 896
+  max_seq_len: 2048
   n_layers: 20
   n_heads: 14
   n_kv_heads: 2
@@ -42,7 +42,7 @@ model:
   input_rmsnorm: false
   residual_scaling: false
   pad_vocab_size_to: 128
-  loss_chunk_size: 1024
+  loss_chunk_size: 4096
   document_attention_backend: dense
 
 data:
@@ -58,7 +58,7 @@ data:
   train_token_files: ["train*.bin"]
   val_token_files: ["val*.bin"]
   add_bos: true
-  stride: 896
+  stride: 2048
   strict_tokenizer_match: true
   document_boundary_policy: eos
   document_attention: false

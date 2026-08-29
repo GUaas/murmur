@@ -26,7 +26,7 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
 | 层数 | 20 |
 | 隐藏维度 | 896 |
 | Attention heads / KV heads | 14 / 2 |
-| 上下文长度 | 896 tokens |
+| 上下文长度 | 基础预训练 2,048 tokens；文本简化 896 tokens |
 | 词表 | 32,000 |
 | 归一化 / MLP / 位置编码 | RMSNorm / SwiGLU / RoPE |
 | 其他 | tied embeddings、QK normalization、无 bias |

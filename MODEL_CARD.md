@@ -6,19 +6,24 @@
 
 - Architecture: decoder-only Transformer
 - Parameters: 203,037,056
-- Context: 896 tokens
+- Context: 2,048 tokens
 - Vocabulary: 32,000 SentencePiece tokens
 - Layers / hidden size: 20 / 896
 - Attention heads / KV heads: 14 / 2
 - Normalization / MLP / positions: RMSNorm / SwiGLU / RoPE
 - Intended use: Chinese language-model research, continued pretraining, and task-specific fine-tuning
 - Checkpoint filename: `murmur_203m_base_weights_only.pt`
+- Checkpoint size: 812,223,200 bytes
+- SHA-256: `5406a6ac67c47fe53eb0d65eff4f490aca200cdb89d172fdc8f56f24d2dd0297`
+- Recorded training step: 68,000
+- Recorded best validation loss: 2.9117594164
 
 The base checkpoint is a weights-only PyTorch state dictionary. Load it with the model definition in `muddywater/model.py` and the matching YAML configuration.
 
 ### Murmur 203M Text Simplification
 
 - Base: Murmur 203M Base
+- Context: 896 tokens
 - Training method: full-parameter supervised fine-tuning
 - Input protocol: `<|im_start|>{source}<|im_end|>`
 - Target protocol: `{target}<eos>`
