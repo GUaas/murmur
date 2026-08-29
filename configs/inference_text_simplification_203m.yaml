@@ -1,0 +1,56 @@
+seed: 20260814
+device: auto
+
+tokenizer:
+  path: ../tokenizer/sp_unigram_32k.model
+
+checkpoint: ../model/murmur_203m_text_simplification_best_weights_only.pt
+
+model:
+  max_seq_len: 896
+  n_layers: 20
+  n_heads: 14
+  n_kv_heads: 2
+  n_embd: 896
+  dropout: 0.0
+  bias: false
+  tie_weights: true
+  gradient_checkpointing: false
+  norm_type: rmsnorm
+  mlp_type: swiglu
+  mlp_hidden_multiple_of: 256
+  position_encoding: rope
+  rope_theta: 10000.0
+  qk_norm: true
+  input_rmsnorm: false
+  residual_scaling: false
+  pad_vocab_size_to: 128
+  loss_chunk_size: 1024
+
+generation:
+  apply_chat_template: false
+  add_bos: true
+  max_new_tokens: 256
+  temperature: 0.0
+  top_k: null
+  top_p: null
+  do_sample: false
+  repetition_penalty: 1.0
+  stop_strings: ["<|im_start|>", "<|im_end|>"]
+  return_full_text: false
+  skip_special_tokens: true
+  use_cache: true
+  strict_tokenizer_match: false
+
+text_simplification:
+  source_label: "<|im_start|>"
+  target_label: "<|im_end|>"
+  sanitize_reserved_tags: true
+
+long_text:
+  mode: auto
+  max_prompt_tokens_per_chunk: 160
+  adaptive_output_tokens: true
+  output_token_ratio: 1.25
+  min_new_tokens: 32
+  fallback_on_empty: true

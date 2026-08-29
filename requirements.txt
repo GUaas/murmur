@@ -1,0 +1,6 @@
+torch>=2.2,<3.0
+PyYAML>=6.0,<7.0
+tqdm>=4.66,<5.0
+numpy>=1.23,<3.0
+tokenizers>=0.20,<1.0
+sentencepiece>=0.2,<0.2.1

@@ -1,0 +1,5 @@
+# Optional local data-preparation dependencies. Training servers do not need these
+# after the cleaned JSONL/token cache has been built.
+huggingface_hub>=1.0,<2.0
+hf_xet>=1.1,<2.0
+pyarrow>=15,<25

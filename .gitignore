@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local data and generated artifacts
+data/
+outputs/
+output/
+logs/
+*.log
+*.pid
+.torch_compile_cache/
+
+# Model weights are distributed through GitHub Releases
+model/
+release-assets/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Token caches and temporary archives
+*.bin
+*.npy
+*.npz
+*.zip
+*.tar
+*.tar.gz
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

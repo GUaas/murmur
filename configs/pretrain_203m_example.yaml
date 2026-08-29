@@ -1,0 +1,97 @@
+# Reproducible starting template for Murmur 203M pretraining.
+# Replace the data paths and training budget with values appropriate for your corpus.
+strict_config: true
+seed: 20260829
+device: cuda
+
+tokenizer:
+  path: ../tokenizer/sp_unigram_32k.model
+  sha256: bc784f8816ec143bc53d1744d3e607872fb27a4ba4d689792915add6a78003d4
+  model_type: sentencepiece_unigram
+  vocab_size: 32000
+  byte_fallback: true
+  split_digits: true
+  character_coverage: 0.9995
+  max_sentencepiece_length: 16
+  max_sentence_length: 4096
+  hard_vocab_limit: true
+  normalization_rule_name: identity
+  remove_extra_whitespaces: false
+  user_defined_symbols: ["<|im_start|>", "<|im_end|>"]
+  sample_size: 300000
+  diagnostic_size: 20000
+  progress: 100000
+  num_threads: 4
+
+model:
+  max_seq_len: 896
+  n_layers: 20
+  n_heads: 14
+  n_kv_heads: 2
+  n_embd: 896
+  dropout: 0.0
+  bias: false
+  tie_weights: true
+  gradient_checkpointing: true
+  norm_type: rmsnorm
+  mlp_type: swiglu
+  mlp_hidden_multiple_of: 256
+  position_encoding: rope
+  rope_theta: 10000.0
+  qk_norm: true
+  input_rmsnorm: false
+  residual_scaling: false
+  pad_vocab_size_to: 128
+  loss_chunk_size: 1024
+  document_attention_backend: dense
+
+data:
+  train_paths: ["../data/pretrain/raw/*.jsonl"]
+  val_paths: []
+  jsonl_format: text
+  jsonl_text_key: text
+  min_chars: 1
+  validation_split: 0.005
+  shuffle_split: false
+  split_mode: hash
+  token_cache_dir: ../data/pretrain/cache
+  train_token_files: ["train*.bin"]
+  val_token_files: ["val*.bin"]
+  add_bos: true
+  stride: 896
+  strict_tokenizer_match: true
+  document_boundary_policy: eos
+  document_attention: false
+  ignore_cross_document_targets: true
+  diagnostic_samples: 256
+
+training:
+  output_dir: ../outputs/pretrain_203m
+  optimizer: adamw
+  batch_size: 4
+  grad_accum_steps: 8
+  eval_batch_size: 4
+  num_workers: 2
+  eval_num_workers: 1
+  max_epochs: 1
+  max_steps: 10000
+  learning_rate: 0.0003
+  min_lr: 0.00003
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  warmup_ratio: 0.02
+  lr_decay: true
+  grad_clip: 1.0
+  precision: bf16
+  compile: false
+  log_interval: 10
+  initial_eval: true
+  eval_interval: 250
+  eval_batches: 32
+  eval_shuffle: false
+  save_interval: 250
+  save_best: true
+  final_eval: true
+  write_diagnostics: true
+  write_run_manifest: true
+  write_training_summary: true
