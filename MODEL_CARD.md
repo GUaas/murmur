@@ -35,7 +35,7 @@ The base checkpoint is a weights-only PyTorch state dictionary. Load it with the
 - Checkpoint size: 812,221,131 bytes
 - SHA-256: `da9690eb4a6806e8570f0df83da3c6149f1a8cd29b423d568be907e1ef913777`
 
-The SFT corpus itself is not distributed. Local training artifacts identify the corpus as including synthetic simplification targets generated with OpenAI GPT-5.6 Sol. Anyone publishing or reusing the derived checkpoint must independently confirm that their agreement with the provider and all source-data licenses permit the intended use and distribution.
+The SFT corpus itself is not distributed. The repository owner states that the released checkpoint was not trained on GPT-5.6 Sol distilled data. Optional distillation utilities present in the training code do not describe the provenance of the released checkpoint.
 
 ## Tokenizer
 
