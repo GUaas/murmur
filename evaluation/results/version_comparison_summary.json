@@ -1,0 +1,71 @@
+{
+  "protocol": {
+    "previous_model": "simpl_best_model (first version, 140M)",
+    "current_model": "Murmur 203M text simplification (second version)",
+    "independent_core_cases": 51,
+    "bootstrap_resamples": 10000,
+    "total_score_note": "The weighted total uses independent stress and same-machine performance results. The current model's checkpoint-selection validation set is excluded from the total."
+  },
+  "weights_percent": {
+    "simplification_quality": 30,
+    "factual_preservation": 20,
+    "simplification_strength": 10,
+    "robustness": 15,
+    "long_text": 10,
+    "inference_efficiency": 10,
+    "stability": 5
+  },
+  "scorecard": [
+    {"metric": "简化质量", "previous": 62.646, "current": 56.867},
+    {"metric": "事实保持", "previous": 91.949, "current": 96.521},
+    {"metric": "简化力度", "previous": 86.761, "current": 68.175},
+    {"metric": "鲁棒性", "previous": 88.766, "current": 97.154},
+    {"metric": "长文本能力", "previous": 48.393, "current": 50.387},
+    {"metric": "推理效率", "previous": 99.955, "current": 74.690},
+    {"metric": "稳定性", "previous": 100.000, "current": 99.960},
+    {"metric": "加权总分", "previous": 79.010, "current": 75.261}
+  ],
+  "core_quality": {
+    "previous": {"sari": 0.5714531374, "rouge_l": 0.7855712187, "chrf": 0.5253287219},
+    "current": {"sari": 0.4649906531, "rouge_l": 0.7711920140, "chrf": 0.5241058159},
+    "paired_current_minus_previous": {
+      "sari": {"mean": -0.106462, "lower_95": -0.176662, "upper_95": -0.038285, "current_win_rate": 0.294118},
+      "rouge_l": {"mean": -0.014379, "lower_95": -0.046353, "upper_95": 0.017399, "current_win_rate": 0.372549},
+      "chrf": {"mean": -0.001223, "lower_95": -0.048894, "upper_95": 0.046509, "current_win_rate": 0.372549}
+    }
+  },
+  "reliability": [
+    {"metric": "数字 F1", "previous": 0.9442401961, "current": 0.9830508475},
+    {"metric": "关键信息保持", "previous": 0.8947368421, "current": 0.9473684211},
+    {"metric": "简单句原样保持", "previous": 0.583333, "current": 1.0},
+    {"metric": "扰动一致性", "previous": 0.983663, "current": 0.943088},
+    {"metric": "长文尾部事实", "previous": 1.0, "current": 1.0}
+  ],
+  "efficiency": [
+    {"metric": "参数量 (M)", "previous": 140.193024, "current": 203.037056, "lower_is_better": true},
+    {"metric": "权重 (MiB)", "previous": 535.0180, "current": 774.5944, "lower_is_better": true},
+    {"metric": "加载 (s)", "previous": 0.13828, "current": 2.320254, "lower_is_better": true},
+    {"metric": "峰值内存 (MiB)", "previous": 1064.8125, "current": 1889.7578, "lower_is_better": true},
+    {"metric": "延迟 p50 (ms)", "previous": 1141.6735, "current": 1139.1297, "lower_is_better": true},
+    {"metric": "延迟 p95 (ms)", "previous": 4839.2323, "current": 4933.9699, "lower_is_better": true},
+    {"metric": "解码吞吐 (tok/s)", "previous": 32.5293, "current": 23.1206, "lower_is_better": false}
+  ],
+  "category_sari": [
+    {"category": "academic", "previous": 0.490768, "current": 0.593774},
+    {"category": "entity", "previous": 0.665494, "current": 0.546633},
+    {"category": "formal", "previous": 0.697245, "current": 0.593293},
+    {"category": "identity", "previous": 0.716383, "current": 1.0},
+    {"category": "injection", "previous": 0.519595, "current": 0.523272},
+    {"category": "legal", "previous": 0.456753, "current": 0.251010},
+    {"category": "long_context", "previous": 0.508571, "current": 0.585488},
+    {"category": "mixed", "previous": 0.546359, "current": 0.607985},
+    {"category": "negation", "previous": 0.469111, "current": 0.493785},
+    {"category": "news", "previous": 0.511652, "current": 0.360387},
+    {"category": "noisy", "previous": 0.655679, "current": 0.513580},
+    {"category": "numbers", "previous": 0.535746, "current": 0.373770},
+    {"category": "perturbation", "previous": 0.641608, "current": 0.430393},
+    {"category": "spoken", "previous": 0.623954, "current": 0.476170},
+    {"category": "technical", "previous": 0.552398, "current": 0.477641},
+    {"category": "traditional", "previous": 0.196245, "current": 0.300564}
+  ]
+}

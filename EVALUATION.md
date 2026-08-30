@@ -1,6 +1,6 @@
 # Murmur v0.1.0 推理效果与评估
 
-本文记录 GitHub Release `v0.1.0` 两份权重的可核验训练指标、文本简化自动评估和实际推理样例。精确数值另见 [`evaluation/results/v0.1.0_metrics.json`](evaluation/results/v0.1.0_metrics.json)，文本简化验证 loss 序列见 [`evaluation/results/text_simplification_validation_loss.csv`](evaluation/results/text_simplification_validation_loss.csv)。
+本文记录 GitHub Release `v0.1.0` 两份权重的可核验训练指标、文本简化自动评估和实际推理样例。精确数值另见 [`evaluation/results/v0.1.0_metrics.json`](evaluation/results/v0.1.0_metrics.json)，文本简化验证 loss 序列见 [`evaluation/results/text_simplification_validation_loss.csv`](evaluation/results/text_simplification_validation_loss.csv)，旧版 140M 与当前 203M 的对比数据见 [`evaluation/results/version_comparison_summary.json`](evaluation/results/version_comparison_summary.json)。全部公开图表已经直接展示在 [`README.md`](README.md)。
 
 ## 1. 基础预训练模型
 
@@ -58,7 +58,7 @@ python scripts/generate.py \
 | 监督 tokens/s | 6,032.99 |
 | 优化器步稳定性 | 537/537 成功；0 AMP overflow；0 non-finite gradient skip |
 
-![文本简化训练与验证 loss 曲线](docs/assets/text_simplification_training_curve.png)
+![文本简化训练与验证 loss 曲线](docs/assets/evaluation/current/07_training_curve.png)
 
 验证 loss 在 step 350 达到最低点，之后回升；发布的 `best_weights_only` 权重来自最佳点，而不是最终 step 537。这也是同时公布最佳值和最终值的原因。
 

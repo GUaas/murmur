@@ -20,6 +20,7 @@
 - 200-pair validation sample: SARI 0.716924; ROUGE-L 0.915904; chrF 0.790481
 - Number preservation on 56 numbered samples: precision 0.991071; recall 1.000000
 - Full methodology, caveats, loss history, and inference examples: [EVALUATION.md](https://github.com/GUaas/murmur/blob/main/EVALUATION.md)
+- The repository homepage now embeds the complete current-model, long-text, and previous-140M-vs-current-203M evaluation chart gallery.
 
 ## Model assets
 
