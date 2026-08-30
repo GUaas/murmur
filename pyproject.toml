@@ -22,7 +22,6 @@ include = ["muddywater*"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
-reports = ["matplotlib>=3.8,<4"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

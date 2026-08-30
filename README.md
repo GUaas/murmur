@@ -65,7 +65,6 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
 - 发布回归：从 checkpoint-selection validation split 固定抽取 200 对，结果就是上方的 `SARI 0.716924`。
 - 极限评估：500 条同分布验证复核，以及 135 条不参与训练的独立压力样例。
 - 长文本评估：16 篇独立长文档，对比整篇直接推理和分句分块推理。
-- 版本对比：旧版 140M 与当前 203M 在 51 条独立核心样本、独立压力项和同机 CPU 性能上的配对比较；当前模型验证集不计入加权总分。
 
 完整文字说明、限制和精确数值见 [`EVALUATION.md`](EVALUATION.md)，机器可读结果位于 [`evaluation/results/`](evaluation/results/)。点击图片可以查看原图。
 
@@ -114,41 +113,6 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
     <td width="50%"><a href="docs/assets/evaluation/long_text/08_chunk_count_cost.png"><img src="docs/assets/evaluation/long_text/08_chunk_count_cost.png" alt="块数成本"></a><br><sub>逐行文本的块数膨胀是主要性能风险</sub></td>
   </tr>
 </table>
-
-### 旧版 140M vs 当前 203M
-
-这里的“旧版”是 `simpl_best_model` 第一版 140M；“当前版”是本 Release 发布的 Murmur 203M 第二版。按既定均衡权重，旧版总分 `79.01`，当前版 `75.26`，应理解为**综合接近、优势方向不同**，不是当前版全面升级。
-
-| 评分维度 | 权重 | 旧版 140M | 当前 203M | 领先 |
-| --- | ---: | ---: | ---: | --- |
-| 简化质量 | 30% | 62.65 | 56.87 | 旧版 |
-| 事实与关键信息保持 | 20% | 91.95 | 96.52 | 当前版 |
-| 简化力度 | 10% | 86.76 | 68.18 | 旧版 |
-| 鲁棒性 | 15% | 88.77 | 97.15 | 当前版 |
-| 长文本能力 | 10% | 48.39 | 50.39 | 当前版 |
-| 推理效率 | 10% | 99.96 | 74.69 | 旧版 |
-| 稳定性 | 5% | 100.00 | 99.96 | 旧版 |
-| **加权总分** | **100%** | **79.01** | **75.26** | **旧版** |
-
-<a href="docs/assets/evaluation/comparison/01_scorecard.png"><img src="docs/assets/evaluation/comparison/01_scorecard.png" alt="旧版与当前版加权评分卡"></a>
-
-<table>
-  <tr>
-    <td width="50%"><a href="docs/assets/evaluation/comparison/02_core_quality.png"><img src="docs/assets/evaluation/comparison/02_core_quality.png" alt="独立核心集质量对比"></a><br><sub>51 条独立核心样本；旧版 SARI 明显更高</sub></td>
-    <td width="50%"><a href="docs/assets/evaluation/comparison/03_reliability.png"><img src="docs/assets/evaluation/comparison/03_reliability.png" alt="事实保持与可靠性对比"></a><br><sub>当前版数字、关键信息和简单句保持更强</sub></td>
-  </tr>
-</table>
-
-<a href="docs/assets/evaluation/comparison/04_efficiency.png"><img src="docs/assets/evaluation/comparison/04_efficiency.png" alt="旧版与当前版 CPU 效率对比"></a>
-
-<a href="docs/assets/evaluation/comparison/05_category_delta.png"><img src="docs/assets/evaluation/comparison/05_category_delta.png" alt="分类 SARI 差异"></a>
-
-旧版更适合强调删冗力度、短中句质量和 CPU 效率的场景；当前 203M 更适合强调数字、实体、否定、简单句保守性和尾部事实的场景。两版长文本都需要守门，自动指标也不能替代人工事实核验。对比数据见 [`evaluation/results/version_comparison_summary.json`](evaluation/results/version_comparison_summary.json)。重绘图片：
-
-```bash
-python -m pip install -e ".[reports]"
-python scripts/render_public_evaluation_charts.py
-```
 
 ## 安装
 

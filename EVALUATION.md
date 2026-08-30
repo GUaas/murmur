@@ -1,6 +1,6 @@
 # Murmur v0.1.0 推理效果与评估
 
-本文记录 GitHub Release `v0.1.0` 两份权重的可核验训练指标、文本简化自动评估和实际推理样例。精确数值另见 [`evaluation/results/v0.1.0_metrics.json`](evaluation/results/v0.1.0_metrics.json)，文本简化验证 loss 序列见 [`evaluation/results/text_simplification_validation_loss.csv`](evaluation/results/text_simplification_validation_loss.csv)，旧版 140M 与当前 203M 的对比数据见 [`evaluation/results/version_comparison_summary.json`](evaluation/results/version_comparison_summary.json)。全部公开图表已经直接展示在 [`README.md`](README.md)。
+本文记录 GitHub Release `v0.1.0` 两份权重的可核验训练指标、文本简化自动评估和实际推理样例。精确数值另见 [`evaluation/results/v0.1.0_metrics.json`](evaluation/results/v0.1.0_metrics.json)，文本简化验证 loss 序列见 [`evaluation/results/text_simplification_validation_loss.csv`](evaluation/results/text_simplification_validation_loss.csv)。全部公开图表已经直接展示在 [`README.md`](README.md)。
 
 ## 1. 基础预训练模型
 
