@@ -11,7 +11,15 @@
 - 评估、长文本推理与发布工具
 - 86 项通过的自动化测试
 
-训练数据、日志、内部评估产物、缓存、密钥和优化器状态不随仓库发布。
+训练数据、完整日志、未筛选的内部评估产物、缓存、密钥和优化器状态不随仓库发布。经过复核的训练指标、自动评估结果和实际推理样例见 [`EVALUATION.md`](https://github.com/GUaas/murmur/blob/main/EVALUATION.md)。
+
+## Evaluation highlights
+
+- Base checkpoint: step 68,000; best validation CE loss 2.911759; PPL 18.3891
+- Text simplification: best validation CE loss 0.502785 at step 350
+- 200-pair validation sample: SARI 0.716924; ROUGE-L 0.915904; chrF 0.790481
+- Number preservation on 56 numbered samples: precision 0.991071; recall 1.000000
+- Full methodology, caveats, loss history, and inference examples: [EVALUATION.md](https://github.com/GUaas/murmur/blob/main/EVALUATION.md)
 
 ## Model assets
 

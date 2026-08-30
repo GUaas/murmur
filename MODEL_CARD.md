@@ -56,6 +56,8 @@ The SFT corpus itself is not distributed. The repository owner states that the r
 
 ## Evaluation guidance
 
+Published v0.1.0 checkpoint metrics, inference examples, validation-loss history, methodology, and caveats are documented in [`EVALUATION.md`](EVALUATION.md). Machine-readable summaries are under `evaluation/results/`.
+
 Evaluate on data that matches the intended domain. At minimum, measure semantic preservation, compression, hallucination, named-entity retention, number retention, special-token leakage, empty-output rate, and latency. Human review is required for high-impact content.
 
 ## License

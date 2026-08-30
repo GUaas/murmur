@@ -1,0 +1,66 @@
+{
+  "release": "v0.1.0",
+  "base_pretraining": {
+    "source": "released checkpoint metadata",
+    "checkpoint_step": 68000,
+    "best_validation_ce_loss": 2.911759416419363,
+    "perplexity_from_best_validation_ce_loss": 18.389124248652386,
+    "full_training_curve_available": false
+  },
+  "text_simplification_training": {
+    "source": "training_summary.json and train.log from the released run",
+    "global_step": 537,
+    "best_checkpoint_step": 350,
+    "initial_validation_ce_loss": 1.4282,
+    "best_validation_ce_loss": 0.5027853698705312,
+    "best_validation_perplexity": 1.65331997081965,
+    "final_validation_ce_loss": 0.5457210036065433,
+    "final_validation_perplexity": 1.7258522796133144,
+    "supervised_train_tokens": 6580812,
+    "processed_train_tokens": 15343104,
+    "elapsed_seconds": 1090.8048825263977,
+    "supervised_tokens_per_second": 6032.987297194962,
+    "attempted_optimizer_steps": 537,
+    "applied_optimizer_steps": 537,
+    "amp_overflow_skips": 0,
+    "nonfinite_gradient_skips": 0
+  },
+  "text_simplification_evaluation": {
+    "source": "deterministic sample of 200 pairs from the validation split",
+    "checkpoint_selection_caveat": "the validation split was used during checkpoint selection",
+    "evaluated_pairs": 200,
+    "numbered_samples": 56,
+    "finetuned": {
+      "rouge_l_f1": 0.915904,
+      "chrf": 0.790481,
+      "sari": 0.716924,
+      "compression_ratio": 0.942954,
+      "reference_compression_ratio": 0.936919,
+      "exact_match_rate": 0.31,
+      "unchanged_copy_rate": 0.34,
+      "empty_rate": 0.0,
+      "eos_or_stop_hit_rate": 0.995,
+      "special_token_leak_rate": 0.0,
+      "repetition_ratio": 0.012579,
+      "number_precision": 0.991071,
+      "number_recall": 1.0,
+      "average_generated_tokens": 33.715
+    },
+    "base_zero_shot": {
+      "rouge_l_f1": 0.120733,
+      "chrf": 0.132906,
+      "sari": 0.245132,
+      "compression_ratio": 12.607268,
+      "reference_compression_ratio": 0.936919,
+      "exact_match_rate": 0.0,
+      "unchanged_copy_rate": 0.0,
+      "empty_rate": 0.0,
+      "eos_or_stop_hit_rate": 0.0,
+      "special_token_leak_rate": 0.0,
+      "repetition_ratio": 0.841644,
+      "number_precision": 0.186889,
+      "number_recall": 0.455782,
+      "average_generated_tokens": 256.0
+    }
+  }
+}

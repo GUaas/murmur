@@ -1,0 +1,24 @@
+seed: 20260830
+device: auto
+
+tokenizer:
+  path: ../tokenizer/sp_unigram_32k.model
+
+checkpoint: ../model/murmur_203m_base_weights_only.pt
+
+generation:
+  # The released base checkpoint is a pretrained continuation model, not an
+  # instruction-tuned assistant. Pass a natural Chinese prefix as the prompt.
+  apply_chat_template: false
+  add_bos: true
+  max_new_tokens: 96
+  temperature: 0.7
+  top_k: 50
+  top_p: 0.9
+  do_sample: true
+  repetition_penalty: 1.08
+  stop_strings: ["<|im_start|>", "<|im_end|>"]
+  return_full_text: false
+  skip_special_tokens: true
+  use_cache: true
+  strict_tokenizer_match: true
