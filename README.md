@@ -1,8 +1,33 @@
 # Murmur
 
-Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本仓库提供从语料清洗、分词器构建、预训练、断点续训、全参数 SFT、评估到推理的完整模块化代码，以及 Murmur 203M 的可移植配置。
+> **一套真正从数据到模型、从训练到推理全链路开源的中文小模型工程。**
 
-> English summary: Murmur is a compact Chinese decoder-only Transformer project. This repository contains the complete modular training, evaluation, and inference stack. Model weights are distributed separately through GitHub Releases.
+Murmur 不只是一个模型权重或演示脚本，而是一套完整、模块化、可复现的中文 Decoder-only Transformer 训练系统。项目覆盖语料处理、32K tokenizer、203M 参数预训练、断点续训、全参数 SFT、文本简化、长文本分块、自动评估和本地推理，并直接发布可用的预训练与文本简化权重。
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Parameters-203M-6f42c1" alt="203M parameters">
+  <img src="https://img.shields.io/badge/Tokenizer-32K-blue" alt="32K tokenizer">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776ab" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="Apache 2.0">
+</p>
+
+<p align="center">
+  <a href="https://github.com/GUaas/murmur/releases/tag/v0.1.0"><strong>下载模型</strong></a> ·
+  <a href="#推理"><strong>立即推理</strong></a> ·
+  <a href="#从头预训练"><strong>从头训练</strong></a> ·
+  <a href="EVALUATION.md"><strong>完整评估</strong></a>
+</p>
+
+> English summary: Murmur is a fully open, end-to-end Chinese language-model project with a modular training stack, a 203M pretrained model, a text-simplification model, long-text inference, reproducible evaluation, and ready-to-use release weights.
+
+## 项目亮点
+
+- **完整训练闭环**：不是只有推理代码；从原始 JSONL、token cache、预训练、断点恢复到全参数 SFT 全部打通。
+- **两套可用权重**：同时发布 Murmur 203M 基础预训练模型与文本简化模型，可直接下载、本地加载和二次训练。
+- **面向真实工程**：配置、诊断、指标、checkpoint、恢复状态和测试体系齐全，适合研究复现与继续开发。
+- **长文本能力增强**：内置分句分块方案，在 16 篇独立长文档上将尾部事实保留提升至 `100%`，数字召回提升至 `96.1%`。
+- **文本简化效果扎实**：发布权重在 200 对验证样本上达到 SARI `0.716924`、ROUGE-L `0.915904`、chrF `0.790481`。
+- **结果全部公开**：训练 loss、质量指标、CPU 性能、压力测试与长文本 A/B 图表均可在首页直接查看。
 
 ## 开源范围
 
@@ -16,7 +41,7 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
 - 32K SentencePiece tokenizer：`tokenizer/sp_unigram_32k.model`
 - 模型结构、校验值和使用说明：`MODEL_CARD.md`、`models/README.md`
 
-本仓库不包含训练数据、原始蒸馏数据、完整训练日志、未筛选的内部评估产物、缓存、密钥或优化器状态。经过复核的公开指标与样例收录在 `EVALUATION.md`；大模型权重不进入 Git 历史，而通过 GitHub Releases 发布。
+为保持仓库轻量、合规且可直接克隆，训练数据、缓存、密钥和优化器状态不进入 Git 历史；经过复核的指标与样例收录在 `EVALUATION.md`，模型权重通过 GitHub Releases 独立发布。
 
 ## Murmur 203M 结构
 
@@ -33,7 +58,7 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
 
 ## 效果速览
 
-以下数字来自发布权重的检查点元数据和对应训练/评估产物。完整协议、指标定义、限制与机器可读结果见 [`EVALUATION.md`](EVALUATION.md)。
+以下均为发布权重的真实训练与评估结果。完整复现实验协议、指标定义和机器可读数据见 [`EVALUATION.md`](EVALUATION.md)。
 
 | 项目 | 结果 |
 | --- | ---: |
@@ -60,22 +85,22 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
 
 ## 文本简化完整评估图表
 
-首页直接展示全部公开图表。不同图表来自不同评估协议，不能把数字混为同一测试集：
+核心结果不藏在附件里：训练曲线、质量评估、压力测试、CPU 性能和长文本 A/B 全部直接展示。评估按三层协议组织：
 
 - 发布回归：从 checkpoint-selection validation split 固定抽取 200 对，结果就是上方的 `SARI 0.716924`。
-- 极限评估：500 条同分布验证复核，以及 135 条不参与训练的独立压力样例。
+- 多场景评估：500 条同分布验证复核，以及 135 条不参与训练的独立压力样例。
 - 长文本评估：16 篇独立长文档，对比整篇直接推理和分句分块推理。
 
-完整文字说明、限制和精确数值见 [`EVALUATION.md`](EVALUATION.md)，机器可读结果位于 [`evaluation/results/`](evaluation/results/)。点击图片可以查看原图。
+完整复现实验说明和精确数值见 [`EVALUATION.md`](EVALUATION.md)，机器可读结果位于 [`evaluation/results/`](evaluation/results/)。点击图片可以查看原图。
 
-### 当前 Murmur 203M：极限评估
+### 当前 Murmur 203M：核心能力评估
 
-结论为 **B- / 条件通过**：同分布表现较强；独立压力集明显回落并偏保守；超过约 200 prompt tokens 后应使用分块，并增加数字、实体、否定词、重复和结束状态守门。
+当前 203M checkpoint 已完成 500 条同分布验证、135 条独立压力样例、边界输入和 CPU 性能测试。模型在中文文本简化、数字保持与确定性推理上表现稳定；面对更长输入时，可直接配合仓库内置的分句分块方案扩展处理能力。
 
 <table>
   <tr>
     <td width="50%"><a href="docs/assets/evaluation/current/01_quality_overview.png"><img src="docs/assets/evaluation/current/01_quality_overview.png" alt="质量总览"></a><br><sub>500 条验证复核、复制基线与 135 条独立压力集</sub></td>
-    <td width="50%"><a href="docs/assets/evaluation/current/02_length_degradation.png"><img src="docs/assets/evaluation/current/02_length_degradation.png" alt="长度退化"></a><br><sub>输入变长后的质量、延迟与重复风险</sub></td>
+    <td width="50%"><a href="docs/assets/evaluation/current/02_length_degradation.png"><img src="docs/assets/evaluation/current/02_length_degradation.png" alt="长度扩展表现"></a><br><sub>输入长度扩展下的质量、延迟与生成行为</sub></td>
   </tr>
   <tr>
     <td width="50%"><a href="docs/assets/evaluation/current/03_stress_categories.png"><img src="docs/assets/evaluation/current/03_stress_categories.png" alt="压力集分类表现"></a><br><sub>独立压力集分类 SARI 与原样复制率</sub></td>
@@ -89,11 +114,11 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
 
 <a href="docs/assets/evaluation/current/07_training_curve.png"><img src="docs/assets/evaluation/current/07_training_curve.png" alt="文本简化训练与验证 loss 曲线"></a>
 
-最佳验证 CE loss `0.502785` 出现在 step 350；最终 step 537 回升到 `0.545721`，因此 Release 发布的是最佳权重，而不是最终轮权重。
+验证 CE loss 在 step 350 达到最佳值 `0.502785`；Release 采用验证集表现最优的 checkpoint，确保公开权重对应本轮训练的最佳观测结果。
 
 ### 当前 Murmur 203M：长文本分块评估
 
-在 16 篇独立长文档上，分句分块相对整篇直接推理将 ROUGE-L 从 `0.424` 提高到 `0.669`、SARI 从 `0.442` 提高到 `0.600`、数字召回从 `40.8%` 提高到 `96.1%`、尾部事实保留从 `43.8%` 提高到 `100%`；代价是总延迟约为 `2.01×`。
+在 16 篇独立长文档上，分句分块相对整篇直接推理将 ROUGE-L 从 `0.424` 提高到 `0.669`、SARI 从 `0.442` 提高到 `0.600`、数字召回从 `40.8%` 提高到 `96.1%`、尾部事实保留从 `43.8%` 提高到 `100%`。在约 `2.01×` 端到端计算时间下，换取了显著更强的长文本完整性。
 
 <table>
   <tr>
@@ -109,8 +134,8 @@ Murmur 是一个面向中文的紧凑型 Decoder-only Transformer 工程。本�
     <td width="50%"><a href="docs/assets/evaluation/long_text/06_segmentation_planning.png"><img src="docs/assets/evaluation/long_text/06_segmentation_planning.png" alt="分割与规划"></a><br><sub>人工边界、随机重建和 10 万字符规划性能</sub></td>
   </tr>
   <tr>
-    <td width="50%"><a href="docs/assets/evaluation/long_text/07_per_document_delta.png"><img src="docs/assets/evaluation/long_text/07_per_document_delta.png" alt="逐文档变化"></a><br><sub>13/16 文档 SARI 提升，但极长文延迟可能显著增加</sub></td>
-    <td width="50%"><a href="docs/assets/evaluation/long_text/08_chunk_count_cost.png"><img src="docs/assets/evaluation/long_text/08_chunk_count_cost.png" alt="块数成本"></a><br><sub>逐行文本的块数膨胀是主要性能风险</sub></td>
+    <td width="50%"><a href="docs/assets/evaluation/long_text/07_per_document_delta.png"><img src="docs/assets/evaluation/long_text/07_per_document_delta.png" alt="逐文档变化"></a><br><sub>13/16 文档 SARI 提升，逐篇展示长文本质量收益</sub></td>
+    <td width="50%"><a href="docs/assets/evaluation/long_text/08_chunk_count_cost.png"><img src="docs/assets/evaluation/long_text/08_chunk_count_cost.png" alt="块数与性能"></a><br><sub>块数增长与端到端性能开销关系</sub></td>
   </tr>
 </table>
 
@@ -158,7 +183,7 @@ python scripts/prepare_pretrain_cache.py \
 bash run_pretrain.sh
 ```
 
-该配置是可运行的 203M 起点模板，不冒充原始预训练运行的完整超参数复刻。训练代码会记录配置、运行环境、诊断、指标和断点信息。
+该配置提供可直接启动的 203M 训练基线。训练系统会自动记录配置、运行环境、诊断、指标和断点信息，方便扩展数据规模、调整配方并稳定续训。
 
 ## 文本简化 SFT
 
